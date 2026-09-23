@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the node structure
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to count the number of nodes
+int countNodes(struct Node* head) {
+    int count = 0;           // Initialize count to 0
+    struct Node* current = head; // Start from the head node
+
+    // Traverse the list until reaching the end (NULL)
+    while (current != NULL) {
+        count++;             // Increment the counter
+        current = current->next; // Move to the next node
+    }
+    
+    return count;            // Return the total count
+}
