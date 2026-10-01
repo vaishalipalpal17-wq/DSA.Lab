@@ -6,14 +6,14 @@
 int stack[MAX];
 int top = -1;
 
-void push(int value) {
+void push(int m) {
     if (top == MAX - 1) {
         printf("Stack Overflow\n");
         return;
     }
     top++;
-    stack[top] = value;
-    printf("%d pushed to stack\n", value);
+    stack[top] = m;
+    printf("%d pushed to stack\n", m);
 }
 
 int pop() {
@@ -21,9 +21,9 @@ int pop() {
         printf("Stack Underflow\n");
         return -1;
     }
-    int value = stack[top];
+    int m = stack[top];
     top--;
-    return value;
+    return m;
 }
 
 int peek() {
@@ -47,7 +47,7 @@ void display() {
 }
 
 int main() {
-    int choice, value;
+    int choice, m;
     
     while (1) {
         printf("\n1. Push\n2. Pop\n3. Peek\n4. Display\n5. Exit\n");
@@ -60,19 +60,19 @@ int main() {
         switch (choice) {
             case 1:
                 printf("Enter value to push: ");
-                scanf("%d", &value);
-                push(value);
+                scanf("%d", &m);
+                push(m);
                 break;
             case 2:
-                value = pop();
-                if (value != -1) {
-                    printf("Popped element: %d\n", value);
+                m = pop();
+                if (m != -1) {
+                    printf("Popped element: %d\n", m);
                 }
                 break;
             case 3:
-                value = peek();
-                if (value != -1) {
-                    printf("Top element: %d\n", value);
+                m = peek();
+                if (m != -1) {
+                    printf("Top element: %d\n", m);
                 }
                 break;
             case 4:
