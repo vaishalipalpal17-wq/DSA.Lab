@@ -1,21 +1,23 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
 #define MAX 100
 
 char stack[MAX];
 int top = -1;
 
-void push(char c) {
+void push(char c)
+{
     stack[++top] = c;
 }
 
-char pop() {
+char pop()
+{
     return stack[top--];
 }
 
-int priority(char c) {
+int priority(char c)
+{
     if (c == '^')
         return 3;
     if (c == '*' || c == '/')
@@ -25,18 +27,21 @@ int priority(char c) {
     return 0;
 }
 
-void reverse(char str[]) {
+void reverse(char str[])
+{
     int i, j;
     char temp;
 
-    for (i = 0, j = strlen(str) - 1; i < j; i++, j--) {
+    for (i = 0, j = strlen(str) - 1; i < j; i++, j--)
+    {
         temp = str[i];
         str[i] = str[j];
         str[j] = temp;
     }
 }
 
-int main() {
+int main()
+{
     char infix[MAX], prefix[MAX];
     int i, j = 0;
     char c;
@@ -46,7 +51,8 @@ int main() {
 
     reverse(infix);
 
-    for (i = 0; infix[i] != '\0'; i++) {
+    for (i = 0; infix[i] != '\0'; i++)
+    {
         if (infix[i] == '(')
             infix[i] = ')';
         else if (infix[i] == ')')
@@ -55,24 +61,35 @@ int main() {
 
     top = -1;
 
-    for (i = 0; infix[i] != '\0'; i++) {
+    for (i = 0; infix[i] != '\0'; i++)
+    {
         c = infix[i];
 
-        if (isalnum(c)) {
+        if ((c >= 'A' && c <= 'Z') ||
+            (c >= 'a' && c <= 'z') ||
+            (c >= '0' && c <= '9'))
+        {
             prefix[j++] = c;
         }
-        else if (c == '(') {
+        else if (c == '(')
+        {
             push(c);
         }
-        else if (c == ')') {
+        else if (c == ')')
+        {
             while (top != -1 && stack[top] != '(')
                 prefix[j++] = pop();
+
             pop();
         }
-        else {
+        else
+        {
             while (top != -1 && stack[top] != '(' &&
                    priority(stack[top]) > priority(c))
+            {
                 prefix[j++] = pop();
+            }
+
             push(c);
         }
     }
