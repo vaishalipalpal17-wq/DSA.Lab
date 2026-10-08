@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <ctype.h>
 
 #define MAX 100
 
@@ -40,7 +39,9 @@ int main()
     {
         c = infix[i];
 
-        if (isalnum(c))
+        if ((c >= 'A' && c <= 'Z') || 
+            (c >= 'a' && c <= 'z') || 
+            (c >= '0' && c <= '9'))
         {
             postfix[j++] = c;
         }
