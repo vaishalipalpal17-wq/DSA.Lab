@@ -16,7 +16,7 @@ char pop()
     return stack[top--];
 }
 
-int priority(char c)
+int p(char c)
 {
     if (c == '^')
         return 3;
@@ -85,7 +85,7 @@ int main()
         else
         {
             while (top != -1 && stack[top] != '(' &&
-                   priority(stack[top]) > priority(c))
+                   p(stack[top]) > p(c))
             {
                 prefix[j++] = pop();
             }
