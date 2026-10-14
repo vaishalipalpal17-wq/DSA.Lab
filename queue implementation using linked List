@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *f = NULL, *r = NULL;
+
+void enqueue(int value) {
+    struct node *newnode;
+    newnode = (struct node *)malloc(sizeof(struct node));
+
+    if (newnode == NULL) {
+        printf("Memory allocation failed\n");
+        return;
+    }
+
+    newnode->data = value;
+    newnode->next = NULL;
+
+    if (f == NULL) {
+        f = r = newnode;
+    } else {
+        r->next = newnode;
+        r = newnode;
+    }
+}
+
+void dequeue() {
+    struct node *temp;
+
+    if (f == NULL) {
+        printf("Queue Underflow\n");
+        return;
+    }
+
+    temp = f;
+    printf("Deleted element: %d\n", f->data);
+    f = f->next;
+
+    if (f == NULL)
+        r = NULL;
+
+    free(temp);
+}
+
+void display() {
+    struct node *temp = f;
+
+    if (f == NULL) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+
+    printf("\n");
+}
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+
+            case 2:
+                dequeue();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                exit(0);
+
+            default:
+                printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
